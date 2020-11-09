@@ -1,0 +1,32 @@
+{
+    "name": "phelix/flutterwave",
+    "description": "An encapsulation of the Flutterwave Payment APIs",
+    "keywords": ["phelix", "flutterwave", "kuzalab"],
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Phelix Juma",
+            "email": "jumaphelix@kuzalab.com"
+        }
+    ],
+    "type": "package",
+    "scripts": {
+      "test": "vendor/bin/phpunit",
+      "phpdoc": "vendor/phpdocumentor/phpdocumentor/bin/phpdoc"
+    },
+    "require": {
+        "ext-json": "*",
+        "ext-openssl": "*",
+        "ext-iconv": "*",
+        "ext-curl": "*",
+        "guzzlehttp/guzzle": "~6.0"
+    },
+    "require-dev": {
+      "phpunit/phpunit": "6.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Phelix\\Flutterwave\\": "src/"
+        }
+    }
+}
