@@ -139,7 +139,7 @@ final class Standard {
      * Pay via card
      */
     public function payViaCard() {
-        $this->setPaymentOption(PaymentOptions::CARD);
+        $this->setPaymentOption(PaymentOption::CARD);
 
         return $this;
     }
@@ -149,7 +149,7 @@ final class Standard {
      * @return $this
      */
     public function payViaAccount() {
-        $this->setPaymentOption(PaymentOptions::ACCOUNT);
+        $this->setPaymentOption(PaymentOption::ACCOUNT);
 
         return $this;
     }
@@ -160,7 +160,7 @@ final class Standard {
      */
     public function payViaBank() {
 
-        $this->setPaymentOption(PaymentOptions::BANK_TRANSFER);
+        $this->setPaymentOption(PaymentOption::BANK_TRANSFER);
 
         return $this;
     }
@@ -170,7 +170,7 @@ final class Standard {
      * @return $this
      */
     public function payViaMpesa() {
-        $this->setPaymentOption(PaymentOptions::MPESA);
+        $this->setPaymentOption(PaymentOption::MPESA);
 
         return $this;
     }
@@ -180,7 +180,7 @@ final class Standard {
      * @return $this
      */
     public function payViaMobileMoneyFranco() {
-        $this->setPaymentOption(PaymentOptions::MOBILE_MONEY_FRANCO);
+        $this->setPaymentOption(PaymentOption::MOBILE_MONEY_FRANCO);
 
         return $this;
     }
@@ -190,7 +190,7 @@ final class Standard {
      * @return $this
      */
     public function payViaMobileMoneyGhana() {
-        $this->setPaymentOption(PaymentOptions::MOBILE_MONEY_GHANA);
+        $this->setPaymentOption(PaymentOption::MOBILE_MONEY_GHANA);
 
         return $this;
     }
@@ -200,7 +200,7 @@ final class Standard {
      * @return $this
      */
     public function payViaMobileMoneyRwanda() {
-        $this->setPaymentOption(PaymentOptions::MOBILE_MONEY_RWANDA);
+        $this->setPaymentOption(PaymentOption::MOBILE_MONEY_RWANDA);
 
         return $this;
     }
@@ -210,7 +210,7 @@ final class Standard {
      * @return $this
      */
     public function payViaMobileMoneyTanzania() {
-        $this->setPaymentOption(PaymentOptions::MOBILE_MONEY_TANZANIA);
+        $this->setPaymentOption(PaymentOption::MOBILE_MONEY_TANZANIA);
 
         return $this;
     }
@@ -220,7 +220,7 @@ final class Standard {
      * @return $this
      */
     public function payViaMobileMoneyUganda() {
-        $this->setPaymentOption(PaymentOptions::MOBILE_MONEY_UGANDA);
+        $this->setPaymentOption(PaymentOption::MOBILE_MONEY_UGANDA);
 
         return $this;
     }
@@ -230,7 +230,7 @@ final class Standard {
      * @return $this
      */
     public function payViaMobileMoneyZambia() {
-        $this->setPaymentOption(PaymentOptions::MOBILE_MONEY_ZAMBIA);
+        $this->setPaymentOption(PaymentOption::MOBILE_MONEY_ZAMBIA);
 
         return $this;
     }
@@ -240,7 +240,7 @@ final class Standard {
      * @return $this
      */
     public function payViaQr() {
-        $this->setPaymentOption(PaymentOptions::QR);
+        $this->setPaymentOption(PaymentOption::QR);
 
         return $this;
     }
@@ -250,7 +250,7 @@ final class Standard {
      * @return $this
      */
     public function payViaUssd() {
-        $this->setPaymentOption(PaymentOptions::USSD);
+        $this->setPaymentOption(PaymentOption::USSD);
 
         return $this;
     }
@@ -260,7 +260,7 @@ final class Standard {
      * @return $this
      */
     public function payViaCredit() {
-        $this->setPaymentOption(PaymentOptions::CREDIT);
+        $this->setPaymentOption(PaymentOption::CREDIT);
 
         return $this;
     }
@@ -271,7 +271,7 @@ final class Standard {
      * @return $this
      */
     public function payViaBarter() {
-        $this->setPaymentOption(PaymentOptions::BARTER);
+        $this->setPaymentOption(PaymentOption::BARTER);
 
         return $this;
     }
@@ -281,7 +281,7 @@ final class Standard {
      * @return $this
      */
     public function payViaPaga() {
-        $this->setPaymentOption(PaymentOptions::PAGA);
+        $this->setPaymentOption(PaymentOption::PAGA);
 
         return $this;
     }
@@ -291,7 +291,7 @@ final class Standard {
      * @return $this
      */
     public function payViaVoucher() {
-        $this->setPaymentOption(PaymentOptions::VOUCHER);
+        $this->setPaymentOption(PaymentOption::VOUCHER);
 
         return $this;
     }
@@ -301,7 +301,7 @@ final class Standard {
      * @return $this
      */
     public function payViaPayAttitude() {
-        $this->setPaymentOption(PaymentOptions::PAY_ATTITUDE);
+        $this->setPaymentOption(PaymentOption::PAY_ATTITUDE);
 
         return $this;
     }
@@ -423,7 +423,30 @@ final class Standard {
             "customizations" => $this->customizations
         ];
 
-        return $this->flutterwave->request->request("get", "payments", $this->flutterwave->token, $body);
+        return $this->flutterwave->request->request("post", "payments", $this->flutterwave->token, $body);
+    }
+
+    /**
+     * Initiate recurrent/subscription time payment
+     *
+     * @param $planId
+     * @return Request
+     */
+    public function initiateRecurrentPayment() {
+
+        $body = [
+            "tx_ref" => $this->transaction_reference,
+            "amount" => $this->amount,
+            "currency"  => $this->currency,
+            "redirect_url" => $this->redirect_url,
+            "payment_options" => $this->payment_options,
+            "meta"  => $this->meta,
+            "customer" => $this->customer,
+            "customizations" => $this->customizations,
+            "payment_plan" => $this->payment_plan
+        ];
+
+        return $this->flutterwave->request->request("post", "payments", $this->flutterwave->token, $body);
     }
 
 }

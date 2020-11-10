@@ -30,7 +30,7 @@ final class Request {
 
     public $statusText;
 
-    private $responseBody;
+    public $responseBody;
 
     public $responseMessage;
 
@@ -62,7 +62,7 @@ final class Request {
         try {
 
             if (!is_null($token)) {
-                $this->headers['X-Authorization'] = "Bearer $token";
+                $this->headers['Authorization'] = "Bearer $token";
             }
 
             $options['headers'] = $this->headers;

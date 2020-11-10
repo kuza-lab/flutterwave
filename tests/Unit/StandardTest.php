@@ -46,15 +46,42 @@ class StandardTest extends TestCase {
 
         $response = $this
             ->standard
-            ->setCustomizations("G-Money", "Group Lending Platform", "https://")
+            ->setCustomizations("G-Money", "Group Lending Platform", "https://group-money.com/wp-content/uploads/2020/08/G-Money-site-logo-e1598441322151.png")
             ->setCustomer("Phelix Juma", "jumaphelix@gmail.com", "+254729941254")
             ->setTransactionReference("1234")
             ->setCurrency("KES")
             ->setAmount(10)
             ->setMetaData(["group_id" => 1, 'transaction_type' => "deposit_to_group"])
-            ->setRedirectURL("http://")
-            ->payViaCard();
+            ->setRedirectURL("https://api-groups.group-money.com/flutterwave-ipn")
+            ->payViaCard()
+            ->initiateOneTimePayment();
 
-        print_r($response);
+        print($response->responseData['link']);
+
+        $this->assertNotEmpty($response->responseData['link']);
+    }
+
+    /**
+     * Test recurring payment
+     */
+    public function testInitializingRecurrentPayment() {
+
+        $response = $this
+            ->standard
+            ->setCustomizations("G-Money", "Group Lending Platform", "https://group-money.com/wp-content/uploads/2020/08/G-Money-site-logo-e1598441322151.png")
+            ->setCustomer("Phelix Juma", "jumaphelix@gmail.com", "+254729941254")
+            ->setTransactionReference("1234")
+            ->setCurrency("KES")
+            ->setAmount(10)
+            ->setMetaData(["group_id" => 1, 'transaction_type' => "deposit_to_group"])
+            ->setRedirectURL("https://api-groups.group-money.com/flutterwave-ipn")
+            ->setPaymentPlan(8021)
+            ->payViaCard()
+            ->initiateRecurrentPayment();
+
+        print "recurring payment link: ";
+        print($response->responseData['link']);
+
+        $this->assertNotEmpty($response->responseData['link']);
     }
 }

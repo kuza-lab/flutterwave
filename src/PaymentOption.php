@@ -11,7 +11,7 @@
 namespace Phelix\Flutterwave;
 
 
-final class PaymentOptions {
+final class PaymentOption {
 
     public const ACCOUNT = 'account';
     public const CARD = 'card';
