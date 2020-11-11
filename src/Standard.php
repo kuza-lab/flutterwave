@@ -423,7 +423,9 @@ final class Standard {
             "customizations" => $this->customizations
         ];
 
-        return $this->flutterwave->request->request("post", "payments", $this->flutterwave->token, $body);
+        $response =  $this->flutterwave->request->request("post", "payments", $this->flutterwave->token, $body);
+
+        return $response->responseBody;
     }
 
     /**
@@ -446,7 +448,9 @@ final class Standard {
             "payment_plan" => $this->payment_plan
         ];
 
-        return $this->flutterwave->request->request("post", "payments", $this->flutterwave->token, $body);
+        $response =  $this->flutterwave->request->request("post", "payments", $this->flutterwave->token, $body);
+
+        return $response->responseBody;
     }
 
 }

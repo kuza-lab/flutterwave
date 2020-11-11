@@ -24,11 +24,6 @@ final class Flutterwave {
      * @var string $live_base_url
      */
     private $liveBaseUrl = "https://api.flutterwave.com/v3/";
-    /**
-     * Base url for the testing environment
-     * @var string $sandbox_base_url
-     */
-    private $sandboxBaseUrl = "https://api.flutterwave.com/v3/";
 
     /**
      * Actual base url to be used. Set depending on environment of use
@@ -86,27 +81,7 @@ final class Flutterwave {
         $this->publicKey = $publicKey;
         $this->debugLevel = $debugLevel;
 
-        $this->baseURL = $this->sandboxBaseUrl; // by default we use the testing environment
-    }
-
-    /**
-     * Switch to using live
-     * @return $this
-     */
-    public function useLive() {
         $this->baseURL = $this->liveBaseUrl;
-
-        return $this;
-    }
-
-    /**
-     * Switch to using sandbox
-     * @return $this
-     */
-    public function useSandbox() {
-        $this->baseURL = $this->sandboxBaseUrl;
-
-        return $this;
     }
 
     /**

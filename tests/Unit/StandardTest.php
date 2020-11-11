@@ -56,9 +56,9 @@ class StandardTest extends TestCase {
             ->payViaCard()
             ->initiateOneTimePayment();
 
-        print($response->responseData['link']);
+        print($response['data']['link']);
 
-        $this->assertNotEmpty($response->responseData['link']);
+        $this->assertNotEmpty($response['data']['link']);
     }
 
     /**
@@ -80,8 +80,8 @@ class StandardTest extends TestCase {
             ->initiateRecurrentPayment();
 
         print "recurring payment link: ";
-        print($response->responseData['link']);
+        print($response['data']['link']);
 
-        $this->assertNotEmpty($response->responseData['link']);
+        $this->assertNotEmpty($response['data']['link']);
     }
 }

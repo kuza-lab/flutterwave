@@ -1,22 +1,42 @@
-Safaricom SDP SDK by Phelix Juma
+Flutterwave SDK by Phelix Juma
 ================================================
 
-This is a PHP SDK wrapper for Safaricom SDP. Safaricom SDK allows PRSP content providers to integrate their systems 
-with Safaricom's platform. 
+This is a PHP SDK wrapper for Flutterwave.
 
-Included SDP Services 
+1. [Get started](https://developer.flutterwave.com/docs/getting-started-1)
+2. [API Reference](https://developer.flutterwave.com/reference)
+
+
+Included Services 
 =======================
-- Token
-   - Get Token API : getting a token
-   - Refresh Token API : getting a refresh token
-- Subscription API
-   - Activate API  : for subscribing a new user
-   - Deactivate API : for deactivating a user from the subscription
-- Premium SMS
-    - SendSMS API : Sending SMS to a user in a premium service
-- Bulk SMS
-    - Bulk SMS API : Sending Bulk SMS to a set of users
-
+- Account
+   - Get balances for all your accounts
+   - Get balance for a specific account
+- OTP
+   - Create (and optionally send) an OTP 
+   - Validate an OTP
+- Payment Plan
+    - Create a payment plan 
+    - Get all your plans 
+    - Get a specific plan
+    - Update a plan
+    - Cancel a plan 
+- Settlement
+    - Get all settlement records
+    - Get a specific settlement record
+- Standard Payment Integration
+    - Initiate a one time payment
+    - Initiate a recurring payment (involves subscribing the payer to a payment plan)
+- Subscriptions
+    - Get list of all subscriptions
+    - Get all subscriptions for a plan
+    - Get all subscriptions by a user
+    - Get a user's subscription in a plan
+    - Get a specific subscription 
+    - Cancel a subscription 
+    - Activate a subscription 
+- Verification
+    - Verifying a transaction
 
 Requirements
 ============
@@ -34,8 +54,7 @@ Requirements
 Installation
 ============
 
-    composer require phelix/safaricom-sdp
-
+    composer require phelix/flutterwave
 
 How To test
 ===========
@@ -43,7 +62,7 @@ How To test
 To test the package, copy the file "LoadEnv.php.example" in src/tests directory to "LoadEnv.php" and fill in the
 configuration values required and then run the following command
 
-    phpunit test
+    vendor/bin/phpunit test
 
 
 # Documentation
@@ -52,574 +71,344 @@ The docs folder has the technical documentation of each of the classes,methods, 
 order for you to make references to know what a class does or what a function does or what each of the method 
 parameters mean, then the docs have an elaborate description for each of them. 
 
+This being a wrapper for the Flutterwave APIs, you can get more details especially of the expected data structure from [Flutterwave API Reference page](https://developer.flutterwave.com/reference)
 
-## 1. Send Premium SMS
+This SDK version does not include the services not listed in the "Included Services" section.
 
-This is used when sending a premium SMS service to a user; typically an MT message.
+
+## 1. Accounts
+
+Handling account balances
 
 ```php
 
 <?php 
 
-    use Phelix\SafaricomSDP\SDP;
-    use Phelix\SafaricomSDP\PremiumSMS;
-    use Phelix\SafaricomSDP\Exceptions\SDPException;
+    use Phelix\Flutterwave\Flutterwave;
+    use Phelix\Flutterwave\Account;
+    use Phelix\Flutterwave\Exceptions\FlutterwaveException;
 
     try {
-        
-        // We instantiate the SDP class; passing to it, the api username, api password and the cp id
-        $sdp = new SDP($_ENV["SFC_SDP_API_USERNAME"], $_ENV["SFC_SDP_API_PASSWORD"], $_ENV["SFC_SDP_CP_ID"]);
     
-        // By default, SDP will use the sandbox apis (test bed), call useLive() method to use production APIs
-        $sdp->useLive()->init();
+        // We initialize Flutterwave. Only the secret key is compulsory. The rest are optional.
+        $flutterwave = new Flutterwave($_ENV["FLUTTER_WAVE_SECRET_KEY"], $_ENV["FLUTTER_WAVE_ENCRYPTION_KEY"], $_ENV["FLUTTER_WAVE_PUBLIC_KEY"]);
+        
+        $flutterwave->init();
+
+        $account = new Account($flutterwave);
+        
+        //1. Get balances for all accounts
+        $balances = $account->getAllBalances();
+        
+        // 2. Get balance for a specific account (identified by currency)
+        $kes_account_balance = $account->getAccountBalance("KES");
+
+    } catch (FlutterwaveException $exception) {
+        print $exception->getMessage();
+        // log and/or handle exceptions here
+    }
+        
+```
+
+## 1. One Time PIN (OTPs)
+
+Use this where you're using flutterwave to generate and validate your OTPs
+
+```php
+
+<?php 
+
+    use Phelix\Flutterwave\Flutterwave;
+    use Phelix\Flutterwave\OTP;
+    use Phelix\Flutterwave\Exceptions\FlutterwaveException;
+
+    try {
     
-        // We instantiate the premium SMS class and pass to it the SDP class
-        $premiumSMS = new PremiumSMS($sdp);
+        // We initialize Flutterwave. Only the secret key is compulsory. The rest are optional.
+        $flutterwave = new Flutterwave($_ENV["FLUTTER_WAVE_SECRET_KEY"], $_ENV["FLUTTER_WAVE_ENCRYPTION_KEY"], $_ENV["FLUTTER_WAVE_PUBLIC_KEY"]);
         
-        // We send SMS
-        $requestId = "1234"; // Generate an id that you can use for tracking/logging purposes
-        $offerCode = "23456"; // The service for which the sms is being sent
-        $linkId = "233348438989"; // This ID is generated when a user requests for a service in SDP.
-        $phoneNumber = "254712345678"; // The phone number of the user to receive the message. Format is 2547...
-        $message = "This is a test message";
+        $flutterwave->init();
+
+        $otp = new OTP($flutterwave);
         
-        $response = $premiumSMS->sendSMS($requestId, $offerCode, $linkId, $phoneNumber, $message);
+        //1. Use this to generate and send an OTP to a customer
+        $otp_response = $otp->createOTP("Joehn Doe","john.doe@example.com" ,"0112345678", "JP Enterprises", 5, ['whatsapp', 'sms'], 60, true);
         
-        // You can check the response and do logging as necessary. Ensure that the status is correctly logged to
-        // help in tracking if the request was successful or failed
-        if ($response['success']) {
-            // Request sent successfully to SDP. Should not be confused to mean the SMS has been successfully 
-            // delivered to the user
+        // 2. Use this to verify/validate an OTP
+        $otp_val = $otp->validateOTP("otp_reference", 12345);
+
+    } catch (FlutterwaveException $exception) {
+        print $exception->getMessage();
+        // log and/or handle exceptions here
+    }
+```
+
+## 3. Payment Plan
+
+Use this to handle payment plans
+
+```php
+
+<?php 
+
+    use Phelix\Flutterwave\Flutterwave;
+    use Phelix\Flutterwave\PaymentPlan;
+    use Phelix\Flutterwave\Exceptions\FlutterwaveException;
+
+    try {
+    
+        // We initialize Flutterwave. Only the secret key is compulsory. The rest are optional.
+        $flutterwave = new Flutterwave($_ENV["FLUTTER_WAVE_SECRET_KEY"], $_ENV["FLUTTER_WAVE_ENCRYPTION_KEY"], $_ENV["FLUTTER_WAVE_PUBLIC_KEY"]);
+        
+        $flutterwave->init();
+
+        $plan = new PaymentPlan($flutterwave);
+        
+        //1. Use this to create a plan. (This creates a plan named "Test Plan" for KES 1000 to be deducted monthly for 12 months
+        $response = $plan->createPlan("KES", "Test Plan", 1000, "monthly", 12);
+        
+        // 2. Use this to list all your plans
+        $plans = $plan->getPlans();
+        
+        // 3. Use this to get a specific plan
+        $plan = $plan->getOnePlan(1);
+        
+        // 4. Use this to update name of a plan
+        $update = $plan->updatePlan(1, "New Name");
+        
+        // 5. Use this to cancel a plan
+        $cancelled = $plan->cancelPlan(1);
+        
+    } catch (FlutterwaveException $exception) {
+        print $exception->getMessage();
+        // log and/or handle exceptions here
+    }
+```
+
+## 4. Settlement
+
+This is used when handling settlements between the merchant and dlutterwave
+
+```php
+
+<?php 
+
+    use Phelix\Flutterwave\Flutterwave;
+    use Phelix\Flutterwave\Settlement;
+    use Phelix\Flutterwave\Exceptions\FlutterwaveException;
+
+    try {
+    
+        // We initialize Flutterwave. Only the secret key is compulsory. The rest are optional.
+        $flutterwave = new Flutterwave($_ENV["FLUTTER_WAVE_SECRET_KEY"], $_ENV["FLUTTER_WAVE_ENCRYPTION_KEY"], $_ENV["FLUTTER_WAVE_PUBLIC_KEY"]);
+        
+        $flutterwave->init();
+
+        $settlement = new Settlement($flutterwave);
+        
+        //1. Use this to get the list of all settlements
+        $response = $settlement->getSettlements();
+        
+        // 2. Use this to get one settlement
+        $response = $settlement->getOneSettlement(1);
+        
+    } catch (FlutterwaveException $exception) {
+        print $exception->getMessage();
+        // log and/or handle exceptions here
+    }
+```
+
+## 5. Standard Integration
+
+Use this for Flutterwave standard integration. Use this in the section where you initiate payment.
+Check [here](https://developer.flutterwave.com/docs/flutterwave-standard) for more details.
+
+```php
+
+<?php 
+    
+    use Phelix\Flutterwave\Flutterwave;
+    use Phelix\Flutterwave\Standard;
+    use Phelix\Flutterwave\Exceptions\FlutterwaveException;
+
+    try {
+    
+        // We initialize Flutterwave. Only the secret key is compulsory. The rest are optional.
+        $flutterwave = new Flutterwave($_ENV["FLUTTER_WAVE_SECRET_KEY"], $_ENV["FLUTTER_WAVE_ENCRYPTION_KEY"], $_ENV["FLUTTER_WAVE_PUBLIC_KEY"]);
+        
+        $flutterwave->init();
+
+        $standard = new Standard($flutterwave);
+        
+        //1. Use this to initiate a one time payment
+        $response = $standard
+                    ->setCustomizations("JP Enterprises", "Subsidiary of JP Holdings", "https://helixjuma.com.com/avatar.png")
+                    ->setCustomer("Jane Doe", "jane.doe@doedom.com", "+254701234456")
+                    ->setTransactionReference("1234REFJANEDOE")
+                    ->setCurrency("KES")
+                    ->setAmount(1000)
+                    ->setMetaData(["category_id" => 1, 'transaction_type' => "payment_for_doedom"])
+                    ->setRedirectURL("https://phelixjuma.com/flutterwave-ipn")
+                    ->payViaCard() // Use this to pay via card. To use other payment options, check docs for all the other options
+                    ->initiateOneTimePayment();
+        
+        // 2. Use this to initiate a recurrent payment (ie user is subscribed to a payment plan)
+        $response = $standard
+                    ->setCustomizations("JP Enterprises", "Subsidiary of JP Holdings", "https://helixjuma.com.com/avatar.png")
+                    ->setCustomer("Jane Doe", "jane.doe@doedom.com", "+254701234456")
+                    ->setTransactionReference("1234REFJANEDOE")
+                    ->setCurrency("KES")
+                    ->setAmount(1000)
+                    ->setMetaData(["category_id" => 1, 'transaction_type' => "payment_for_doedom"])
+                    ->setRedirectURL("https://phelixjuma.com/flutterwave-ipn")
+                    ->setPaymentPlan(8021) // this is where we set the payment plan id
+                    ->payViaCard() // Use this to pay via card. To use other payment options, check docs for all the other options
+                    ->initiateRecurrentPayment();
+        
+        /**
+         * After a transaction is initiated above, you get a link that you are supposed to redirect the user to. 
+         * Redirect the user to the link where they will do the payments afterwhich Flutterwave redirects them to your redirect url set above
+         * Sample redirect from Flutterwave looks like: https://phelixjuma.com/flutterwave-ipn?status=successful&tx_ref=1234&transaction_id=1686665
+         * Check section below on how to handle and complete transaction in the IPN page.   
+         */
+    } catch (FlutterwaveException $exception) {
+        print $exception->getMessage();
+        // log and/or handle exceptions here
+    }
+```
+
+## 6. IPN (Payment Verification)
+
+Use this in your IPN (the redirect url set when initiating payment)
+
+```php
+
+<?php 
+        
+    use Phelix\Flutterwave\Flutterwave;
+    use Phelix\Flutterwave\Verification;
+    use Phelix\Flutterwave\Exceptions\FlutterwaveException;
+    
+    try {
+        
+        // We initialize Flutterwave. Only the secret key is compulsory. The rest are optional.
+        $flutterwave = new Flutterwave($_ENV["FLUTTER_WAVE_SECRET_KEY"], $_ENV["FLUTTER_WAVE_ENCRYPTION_KEY"], $_ENV["FLUTTER_WAVE_PUBLIC_KEY"]);
+        
+        $flutterwave->init();
+
+        $verification = new Verification($flutterwave);
+        
+        // Your IPN will have query parameters added by Flutterwave. An example is as shown:
+        //  https://phelixjuma.com/flutterwave-ipn?status=successful&tx_ref=1234&transaction_id=1686665
+        
+        // At this stage, you must verify the transaction before confirming that it is successful. Don't just assume it is successful
+        // due to the status parameter in the url
+        
+        $transactionId = sanitize($_GET['transaction_id']); // sanitize() is an arbitrary function. Use your implementation
+        $transactionReference = sanitize($_GET['tx_ref']); // sanitize() is an arbitrary function. Use your implementation
+        
+         // Get the transaction you had initiated by doing a query to your database. getTransaction() is an arbitrary function. 
+        $transaction = getTransaction($transactionReference);
+        
+        if ($transaction) {
             
-            // We can now check the status of the sent message
-            if (isset($response['data']['responseParam'])) {
-                
-                if ($response['data']['responseParam']['status'] == 1) {
-                    // failed to send SMS
-                    print("SMS sending failed with status code" . $response['data']['responseParam']['statusCode']. "Error says: ". $response['data']['responseParam']['description']);
-                } else {
-                    // SMS sending a success. Confirm with the status code and the description and also log them for tracking purposes
-                    print($response['data']['responseParam']['description']);
-                }
+            $response = $verification->verify($transactionId, $transactionReference, $transaction['currency'], $transaction['amount']);
+            
+            // Response is an array of the format $response = ['verified' => true|false,'message' => "response message", 'data'=> <response data>];
+            
+            if ($response['verified'] !== false) {
+                // Verified transaction. Update transaction as successful
             } else {
-                // something wrong seems to have happened. No response param sent back. Handle this for tracking
-                print("Seems the response hasn't been sent. Best to assume it failed to send the sms");
+                // Transaction not verified. Get actual status from $response['data']['status']. Check Flutterwave docs for more details.
             }
             
         } else {
-            // Failed to send the request. Could be network, authentication, authorization errors et al 
-            print("Sending request failed with message" . $response['errorMessage']);
+            // transaction does not exist. Possibly a modified IPN. Log the attempt.
         }
-        
-    
-    } catch (SDPException $ex) {
-        
-        // You can do any error logging operations at this point. Exceptions here would most likely occur 
-        // at the point of token generation
-        
-        print $ex->getMessage();
-        
+    } catch (FlutterwaveException $exception) {
+        print $exception->getMessage();
+        // log and/or handle exceptions here
     }
 ```
 
-## 1. Activate a Subscription
+## 7. Subscription
 
-This is used when subscribing a new user to a service
+Use this for subscriptions
 
 ```php
 
 <?php 
-
-    use Phelix\SafaricomSDP\SDP;
-    use Phelix\SafaricomSDP\Subscription;
-    use Phelix\SafaricomSDP\Exceptions\SDPException;
-
+        
+    use Phelix\Flutterwave\Flutterwave;
+    use Phelix\Flutterwave\Subscription;
+    use Phelix\Flutterwave\Exceptions\FlutterwaveException;
+    
     try {
-        
-        // We instantiate the SDP class; passing to it, the api username, api password and the cp id
-        $sdp = new SDP($_ENV["SFC_SDP_API_USERNAME"], $_ENV["SFC_SDP_API_PASSWORD"], $_ENV["SFC_SDP_CP_ID"]);
     
-        // By default, SDP will use the sandbox apis (test bed), call useLive() method to use production APIs
-        $sdp->useLive()->init();
-    
-        // We instantiate the premium SMS class and pass to it the SDP class
-        $subscription = new Subscription($sdp);
+        // We initialize Flutterwave. Only the secret key is compulsory. The rest are optional.
+        $flutterwave = new Flutterwave($_ENV["FLUTTER_WAVE_SECRET_KEY"], $_ENV["FLUTTER_WAVE_ENCRYPTION_KEY"], $_ENV["FLUTTER_WAVE_PUBLIC_KEY"]);
         
-        // We send SMS
-        $requestId = "1234"; // Generate an id that you can use for tracking/logging purposes
-        $offerCode = "23456"; // The service for which the sms is being sent
-        $phoneNumber = "254712345678"; // The phone number of the user to receive the message. Format is 2547...
-        
-        $response = $subscription->activateSubscription($requestId, $offerCode, $phoneNumber);
-        
-        // You can check the response and do logging as necessary. Ensure that the status is correctly logged to
-        // help in tracking if the request was successful or failed
-        if ($response['success']) {
-            // Request sent successfully to SDP. Should not be confused to mean the activation has been successfully done 
+        $flutterwave->init();
+
+        $subscription = new Subscription($flutterwave);
             
-            // We can now check the status of the sent message
-            if (isset($response['data']['responseParam'])) {
-                
-                if ($response['data']['responseParam']['status'] == 1) {
-                    // failed to activate subscription
-                    print("Activation failed" . $response['data']['responseParam']['statusCode']. "Error says: ". $response['data']['responseParam']['description']);
-                } else {
-                    // Activation a success. Confirm with the status code and the description and also log them for tracking purposes
-                    // Not advisable to assume that this is a success. Always confirm with status code.
-                    print($response['data']['responseParam']['description']);
-                }
-            } else {
-                // something wrong seems to have happened. No response param sent back. Handle this for tracking
-                print("Seems the response hasn't been sent. Best to assume it failed to activate the user");
-            }
-            
-        } else {
-            // Failed to send the request. Could be network, authentication, authorization errors et al 
-            print("Failed to send the request" . $response['errorMessage']);
-        }
+        // 1. Use this to get subscriptions
+        $response = $subscription->getSubscriptions();
         
-    
-    } catch (SDPException $ex) {
+        // 2. Use this to get subscriptions for a plan. Check docs for the other parameters eg pagination
+        $response = $subscription->getPlanSubscriptions(1020);
         
-        // You can do any error logging operations at this point. Exceptions here would most likely occur 
-        // at the point of token generation
+        // 3. Use this to get a user's plan subscription. Check docs for the other parameters eg pagination
+        $response = $subscription->getUserPlanSubscriptions(8021, "janedoe@doedom.com");
         
-        print $ex->getMessage();
+        // 4. Get all subscriptions for a user. Check docs for the other parameters eg pagination
+        $response = $subscription->getUserSubscriptions("janedoe@doedom.com");
         
+        // 5. Get a specific subscription
+        $response = $subscription->getOneSubscription(1);
+        
+        // 6. Cancel a subscription
+        $response = $subscription->cancelSubscription(1);
+        
+        // 7. Activate a subscription
+        $response = $subscription->activateSubscription(1);
+        
+    } catch (FlutterwaveException $exception) {
+        print $exception->getMessage();
+        // log and/or handle exceptions here
     }
 ```
 
-## 3. Deactivate a Subscription
+## 6. Responses and Error codes
 
-This is used when unsubscribing a user from a service
+All responses and error codes are similar to the ones from Flutterwave. Check [here](https://developer.flutterwave.com/docs/flutterwave-errors)
+for details on error codes
 
-```php
-
-<?php 
-
-    use Phelix\SafaricomSDP\SDP;
-    use Phelix\SafaricomSDP\Subscription;
-    use Phelix\SafaricomSDP\Exceptions\SDPException;
-
-    try {
-        
-        // We instantiate the SDP class; passing to it, the api username, api password and the cp id
-        $sdp = new SDP($_ENV["SFC_SDP_API_USERNAME"], $_ENV["SFC_SDP_API_PASSWORD"], $_ENV["SFC_SDP_CP_ID"]);
-    
-        // By default, SDP will use the sandbox apis (test bed), call useLive() method to use production APIs
-        $sdp->useLive()->init();
-    
-        // We instantiate the premium SMS class and pass to it the SDP class
-        $subscription = new Subscription($sdp);
-        
-        // We send SMS
-        $requestId = "1234"; // Generate an id that you can use for tracking/logging purposes
-        $offerCode = "23456"; // The service for which the sms is being sent
-        $phoneNumber = "254712345678"; // The phone number of the user to receive the message. Format is 2547...
-        
-        $response = $subscription->deactivateSubscription($requestId, $offerCode, $phoneNumber);
-        
-        // You can check the response and do logging as necessary. Ensure that the status is correctly logged to
-        // help in tracking if the request was successful or failed
-        if ($response['success']) {
-            // Request sent successfully to SDP. Should not be confused to mean the deactivation has been successfully done 
-            
-            // We can now check the status of the sent message
-            if (isset($response['data']['responseParam'])) {
-                
-                if ($response['data']['responseParam']['status'] == 1) {
-                    // failed to activate subscription
-                    print("Activation failed" . $response['data']['responseParam']['statusCode']. "Error says: ". $response['data']['responseParam']['description']);
-                } else {
-                    // Activation a success. Confirm with the status code and the description and also log them for tracking purposes
-                    // Not advisable to assume that this is a success. Always confirm with status code.
-                    print($response['data']['responseParam']['description']);
-                }
-            } else {
-                // something wrong seems to have happened. No response param sent back. Handle this for tracking
-                print("Seems the response hasn't been sent. Best to assume it failed to deactivate the user");
-            }
-            
-        } else {
-            // Failed to send the request. Could be network, authentication, authorization errors et al 
-            print("Failed to send the request" . $response['errorMessage']);
-        }
-        
-    
-    } catch (SDPException $ex) {
-        
-        // You can do any error logging operations at this point. Exceptions here would most likely occur 
-        // at the point of token generation
-        
-        print $ex->getMessage();
-        
-    }
-```
-
-## 4. Send Bulk SMS
-
-This is used when sending bulk sms to users 
-
-```php
-
-<?php 
-
-    use Phelix\SafaricomSDP\SDP;
-    use Phelix\SafaricomSDP\BulkSMS;
-    use Phelix\SafaricomSDP\Exceptions\SDPException;
-
-    try {
-        
-        // We instantiate the SDP class; passing to it, the api username, api password and the cp id
-        $sdp = new SDP($_ENV["SFC_SDP_API_USERNAME"], $_ENV["SFC_SDP_API_PASSWORD"], $_ENV["SFC_SDP_CP_ID"]);
-    
-        // By default, SDP will use the sandbox apis (test bed), call useLive() method to use production APIs
-        $sdp->useLive()->init();
-    
-        // We instantiate the premium SMS class and pass to it the SDP class
-        $bulkSMS = new BulkSMS($sdp);
-        
-        // We send SMS
-        $requestId = "1234"; // Generate an id that you can use for tracking/logging purposes
-        $username = ""; // Username allocated by the SDP to the partner after successful registration.
-        $packageId = ""; // The id of the campaign package as issued upon successful registration
-        $originatingAddress = ""; // Originating address assigned to partner after successful registration.
-        $recipients = [723345678, 789923456, 79098734];
-        $message = "This is a bulk sms";
-        $callback = "https://your_call_back_url.com/callback";
-        
-        $response = $bulkSMS->sendSMS($requestId, $username, $packageId, $originatingAddress, $recipients, $message, $callback);
-        
-        // You can check the response and do logging as necessary. Ensure that the status is correctly logged to
-        // help in tracking if the request was successful or failed
-        if ($response['success']) {
-            // Request sent successfully to SDP. Should not be confused to mean the bulk has been successfully done 
-            
-            // We can now check the status of the sent message
-            if (isset($response['data'])) {
-                
-                if ($response['data']['status'] == "SUCCESS") {
-                    // Bulk SMS successfully dispatched. This does not mean sent to users; this can only be confirmed from the callback
-                    print("Messages successfully dispatched to SDP");
-                } else {
-                    // Error dispatching bulk SMS to SDP/Safaricom
-                    print("Failed to response code ". $response['data']['statusCode']);
-                }
-            } else {
-                // something wrong seems to have happened. No response param sent back. Handle this for tracking
-                print("Seems the response hasn't been sent. Best to assume it failed to dispatch the bulk SMS to the users");
-            }
-            
-        } else {
-            // Failed to send the request. Could be network, authentication, authorization errors et al 
-            print("Failed to send request. Error says " . $response['errorMessage']);
-        }
-        
-    
-    } catch (SDPException $ex) {
-        
-        // You can do any error logging operations at this point. Exceptions here would most likely occur 
-        // at the point of token generation
-        
-        print $ex->getMessage();
-        
-    }
-```
-
-## 5. Bulk SMS Callback
-
-This is used when getting and handling bulk sms callback
-
-```php
-
-<?php 
-
-    // put this code in your callback route (controller)
-    
-    use Phelix\SafaricomSDP\Utils;
-
-    $response = Utils::getCallback();
-    
-    // get the request id. At this point, you can query your database to get the request so as to be able to update its status
-    $requestId = isset($response['requestId']) ? $response['requestId'] : "";
-        
-    // check status of the callback
-    if ($response['success'] == false) {
-        // callback received has an error
-        
-        // update to failed delivery with the error message as the reason
-        
-        print($response['errorMessage']);
-        
-    } else {
-        
-        // correct callback data. 
-        $data = $response['data'];
-        
-        // check the delivery status
- 
-        $status = $data['responseParam']['status'];
-        
-        if ($status != 0) {
-            // failed to deliver message eg when someone has no airtime or is not subscribed
-            print($data['responseParam']['description']);
-        } else {
-            // message successfully delivered. 
-            
-            // update request as being a succss
-            print("Request $requestId successfully delivered");
-        }
-    }
-    
-            
-```
-
-## 6. SDK General Response Structure
+Generally, all/most responses follow the standard stucture shown below
 
 ```php
 
     $response = [
         "success" => true|false,
-        "statusCode" => "",
-        "statusText" => "",
-        "errorCode" => "",
-        "errorMessage" => "",
-        "data" => [],
-        "debugTrace" => [
-            'request' => [],
-            'response' => []
-        ]
+        "message" => "",
+        "data" => []
     ];
 ```
-- **success**: Can be true | false. It implies success in submitting request to SDP. should not be confused to mean success of the operation eg sending sms
-- **statusCode**: Http status code from SDP eg 200,400,401,500. Standard definitions apply
-- **statusText**: Http status text corresponding to the status code. standard definitions apply
-- **errorCode**: Error code from SDP. This depends on the SDP error codes for the specific SDP API eg sendSMS, bulkSMS, subscription APIs could each have their own error codes denoting different meanings
-- **errorMessage**: The message from SDP describing the error
-- **data**: Has the response data from SDP in case of a success. If "success" is false, this value will be null. The data comes in different formats depending on the specific API being used
-- **debugTrace**: This contains a request and response trace. If 'SFC_SDP_DEBUG' is set to 1, this value will be set and can help debug an error. If the config value is 0, then this field will be null
 
-## 7. Sample Response Examples
+In some cases, meta details are also included eg when getting list of items as shown below:
+```php
 
-- All the response structures described below apply for the "data" key of the response structure described in section 6.
-
-#### i.Get Token API
-
-```php
-    {
-        "msg": "You have been Authenticated to access this protected API System.",
-        "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImF1ZCI6IkFDQ0VTUyIsInNjb3BlcyI6IkFETUlOIi wiaXNzIjoiaHR0cDovL3NpeGRlZS5jb20iLCJpYXQiOjE1Njk0OTc1MjksImV4cCI6MTU3NDI5NzUyOX0.- u2Db8OSDhtITMoFqIZYTgs6u4Ib_voynEA6k7ZwiqJqaPQ1_CnUaARxeaoSpC_BC-78_k- rzOr3v2Jdb9_KaA",
-        "refreshToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImF1ZCI6IlJFRlJFU0giLCJzY29wZXMiOiJBRE1J TiIsImlzcyI6Imh0dHA6Ly9zaXhkZWUuY29tIiwianRpIjoiZGIzOTk4OTYtMTU0ZS00ZDFjLTg1NmYtNTUy MDE2MDU3MDVkIiwiaWF0IjoxNTY5NDk3NTI5LCJleHAiOjE1ODAyOTc1Mjl9.uD7fvaMigBI0a2GC00fte qtTx79Elil1CFxRtXz5CTs1qRhJYUVsD0ZjF5Q13J9btY-5ppuzFDqDFkFfUpZAMw"
-    }
-``` 
-    
-#### ii.Refresh Token API
-    
-```php
-    {
-        "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImF1ZCI6IkFDQ0VTUyIsInNjb3BlcyI6IkFETUlOI iwiaXNzIjoiaHR0cDovL3NpeGRlZS5jb20iLCJpYXQiOjE1Njk0OTc3NTgsImV4cCI6MTU3NDI5Nzc1OH 0.okOMCxGRFd1qt2OLVFFF4eDJ6aPZpLDhkNLA9STVMt9zH7fiMYaNz0S56_tJSXAtxYYq02PoQyG O4WBs716tCg"
-    }
-```
-#### iii.Activate Subscription API
-    
-```php
-     {
-        "requestId":"17",
-        "responseId":"cp2910183038077087336761",
-        "responseTimeStamp":"20191104092806",
-        "channel":"SMS",
-        "operation":"ACTIVATE",
-        "requestParam":{
-           "data":[
-              {
-                 "name":"OfferCode",
-                 "value":"350032100559"
-              },
-              {
-                 "name":"Msisdn",
-                 "value":"795421629"
-              },
-              {
-                 "name":"Language",
-                 "value":"1"
-              },
-              {
-                 "name":"CpId",
-                 "value":"321"
-              }
-           ]
-        },
-        "responseParam":{
-           "status":"1",
-           "statusCode":"0816",
-           "description":"Thank you, your activation of service 5000_Promotional is not processed."
-        }
-     }
-```
-#### iv.Deactivate Subscription API
-    
-```php
-     {
-        "requestId":"17",
-        "responseId":"10189519962937756186",
-        "responseTimeStamp":"20190924161246",
-        "channel":"3",
-        "sourceAddress":"224.223.10.27",
-        "operation":"DEACTIVATE",
-        "requestParam":{
-           "data":[
-              {
-                 "name":"OfferCode",
-                 "value":"1001"
-              },
-              {
-                 "name":"Msisdn",
-                 "value":"716848648"
-              },
-              {
-                 "value":"10"
-              }
-           ]
-        },
-        "responseParam":{
-           "status":"0",
-           "statusCode":"302",
-           "description":"Dear subscriber,You have cancelled your subscription to LOCAL CHANNEL Pack. Thank you for using our service."
-        }
-     }
-```
-
-#### v.Send SMS
-  
-```php
-    // Success. Note responseParam['status']= 0
-     {
-        "requestId":"17",
-        "responseId":"10189519182688287792",
-        "responseTimeStamp":"20190924155948",
-        "channel":"3",
-        "sourceAddress":"224.223.10.27",
-        "operation":"SendSMS",
-        "requestParam":{
-           "data":[
-              {
-                 "name":"LinkId",
-                 "value":"00010310189519161781865526"
-              },
-              {
-                 "name":"Msisdn",
-                 "value":"254795421629"
-              },
-              {
-                 "value":"Thank You for Ondemand Subscription SAFRI TEST TUN Subscption test Send sms"
-              },
-              {
-                 "name":"OfferCode",
-                 "value":"1003"
-              },
-              {
-                 "value":"10"
-              }
-           ]
-        },
-        "responseParam":{
-           "status" : 0,
-           "statusCode" : 768,
-           "description" : "Mesage for xyz sent for processing..."
-        }
-     }
-     
-     // Fail. Note responseParam['status']= 1
-          {
-             "requestId":"17",
-             "responseId":"10189519182688287792",
-             "responseTimeStamp":"20190924155948",
-             "channel":"3",
-             "sourceAddress":"224.223.10.27",
-             "operation":"SendSMS",
-             "requestParam":{
-                "data":[
-                   {
-                      "name":"LinkId",
-                      "value":"00010310189519161781865526"
-                   },
-                   {
-                      "name":"Msisdn",
-                      "value":"254795421629"
-                   },
-                   {
-                      "value":"Thank You for Ondemand Subscription SAFRI TEST TUN Subscption test Send sms"
-                   },
-                   {
-                      "name":"OfferCode",
-                      "value":"1003"
-                   },
-                   {
-                      "value":"10"
-                   }
-                ]
-             },
-             "responseParam":{
-                "status" : 1,
-                "statusCode" : 23,
-                "description" : "Subscription does not exists for the subscriber 7299412..."
-             }
-          }
-```
-        
-#### vi.Bulk SMS
-    
-```php
-     {
-        "keyword":"Bulk",
-        "status":"SUCCESS",
-        "statusCode":"SC0000"
-     }
-```
-        
-#### vii. Bulk SMS Callback
-    
-```php
-     {
-        "requestId":"",
-        "requestTimeStamp":"",
-        "channel":"",
-        "operation" :"",
-        "traceID": "".
-        "requestParam": {
-            "data" : [
-                {
-                    "name" : "Msisdn",
-                    "value":""
-                },
-                {
-                    "name" : "CpId",
-                    "value":""
-                },
-                {
-                    "name" : "CorrelatorId",
-                    "value":""
-                },
-                {
-                    "name" : "Description",
-                    "value":""
-                },
-                {
-                    "name" : "DeliveryStatus",
-                    "value":""
-                },
-                {
-                    "name" : "Type",
-                    "value":""
-                },
-                {
-                    "name" : "CampaignId",
-                    "value":""
-                }
-            
-            ]
-        }
-     }
+    $response = [
+        "status" => 'success',
+        "message" => "",
+        "data" => [],
+        "meta  => [
+            "page_info" => [
+                "total" => 44,
+                "current_page" => 1,
+                "total_pages" => 5
+             ]
+    ];
 ```
 
 Credits
