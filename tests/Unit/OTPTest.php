@@ -27,7 +27,7 @@ class OTPTest extends TestCase {
 
             $flutterwave = new Flutterwave($_ENV["FLUTTER_WAVE_SECRET_KEY"], $_ENV["FLUTTER_WAVE_ENCRYPTION_KEY"], $_ENV["FLUTTER_WAVE_PUBLIC_KEY"]);
 
-            $flutterwave->useSandbox()->init();
+            $flutterwave->init();
 
             $this->otp = new OTP($flutterwave);
 
