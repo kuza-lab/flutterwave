@@ -1,0 +1,274 @@
+\hypertarget{class_phelix_1_1_flutterwave_1_1_subscription}{}\doxysection{Subscription Class Reference}
+\label{class_phelix_1_1_flutterwave_1_1_subscription}\index{Subscription@{Subscription}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_subscription_aecd21b18abc9fe85deb68a37ae823bc0}{\+\_\+\+\_\+construct}} (\mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_flutterwave}{Flutterwave}} \$flutterwave)
+\item 
+\mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_subscription_ae89b666814959b01d89a6ddaffb48d70}{get\+Subscriptions}} (\$email=null, \$transaction\+Id=null, \$plan\+Id=null, \$subscribed\+From=null, \$subscribed\+To=null, \$next\+Due\+From=null, \$next\+Due\+To=null, \$page=null, \$status=null)
+\item 
+\mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_subscription_a5ab2bcfd52526d0134f671af1f006fca}{get\+Plan\+Subscriptions}} (\$plan\+Id, \$transaction\+Id=null, \$subscribed\+From=null, \$subscribed\+To=null, \$next\+Due\+From=null, \$next\+Due\+To=null, \$page=null, \$status=null)
+\item 
+\mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_subscription_a7ed8dfd10cb93dd4e2456ea7da4174c9}{get\+User\+Plan\+Subscriptions}} (\$plan\+Id, \$email, \$transaction\+Id=null, \$subscribed\+From=null, \$subscribed\+To=null, \$next\+Due\+From=null, \$next\+Due\+To=null, \$page=null, \$status=null)
+\item 
+\mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_subscription_a8b9fdc78cf142aadb82893275a03385d}{get\+User\+Subscriptions}} (\$email, \$transaction\+Id=null, \$subscribed\+From=null, \$subscribed\+To=null, \$next\+Due\+From=null, \$next\+Due\+To=null, \$page=null, \$status=null)
+\item 
+\mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_subscription_a396eeb919b72102d3e098f55eba303e5}{get\+One\+Subscription}} (\$id)
+\item 
+\mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_subscription_aa292d0651a6ef75c75c84995adfa8a66}{cancel\+Subscription}} (\$id)
+\item 
+\mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_subscription_a22c8b01724595893975574b900aa6d62}{activate\+Subscription}} (\$id)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_subscription_a35e87c00dec76834996b2c9296fdb1c8}{\$flutterwave}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 14 of file Subscription.\+php.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_phelix_1_1_flutterwave_1_1_subscription_aecd21b18abc9fe85deb68a37ae823bc0}\label{class_phelix_1_1_flutterwave_1_1_subscription_aecd21b18abc9fe85deb68a37ae823bc0}} 
+\index{Subscription@{Subscription}!\_\_construct@{\_\_construct}}
+\index{\_\_construct@{\_\_construct}!Subscription@{Subscription}}
+\doxysubsubsection{\texorpdfstring{\_\_construct()}{\_\_construct()}}
+{\footnotesize\ttfamily \+\_\+\+\_\+construct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_flutterwave}{Flutterwave}}}]{\$flutterwave }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_standard}{Standard}} constructor. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_flutterwave}{Flutterwave}} & {\em \$flutterwave} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 25 of file Subscription.\+php.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_phelix_1_1_flutterwave_1_1_subscription_a22c8b01724595893975574b900aa6d62}\label{class_phelix_1_1_flutterwave_1_1_subscription_a22c8b01724595893975574b900aa6d62}} 
+\index{Subscription@{Subscription}!activateSubscription@{activateSubscription}}
+\index{activateSubscription@{activateSubscription}!Subscription@{Subscription}}
+\doxysubsubsection{\texorpdfstring{activateSubscription()}{activateSubscription()}}
+{\footnotesize\ttfamily activate\+Subscription (\begin{DoxyParamCaption}\item[{}]{\$id }\end{DoxyParamCaption})}
+
+Activate a subscription
+
+
+\begin{DoxyParams}[1]{Parameters}
+int & {\em \$id} & This is the unique id of the subscription you want to activate. It is returned in the Get a subscription call as data.\+id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mixed 
+\end{DoxyReturn}
+
+
+Definition at line 175 of file Subscription.\+php.
+
+\mbox{\Hypertarget{class_phelix_1_1_flutterwave_1_1_subscription_aa292d0651a6ef75c75c84995adfa8a66}\label{class_phelix_1_1_flutterwave_1_1_subscription_aa292d0651a6ef75c75c84995adfa8a66}} 
+\index{Subscription@{Subscription}!cancelSubscription@{cancelSubscription}}
+\index{cancelSubscription@{cancelSubscription}!Subscription@{Subscription}}
+\doxysubsubsection{\texorpdfstring{cancelSubscription()}{cancelSubscription()}}
+{\footnotesize\ttfamily cancel\+Subscription (\begin{DoxyParamCaption}\item[{}]{\$id }\end{DoxyParamCaption})}
+
+Cancel a subscription
+
+
+\begin{DoxyParams}[1]{Parameters}
+int & {\em \$id} & This is the unique id of the subscription you want to cancel. It is returned in the Get a subscription call as data.\+id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mixed 
+\end{DoxyReturn}
+
+
+Definition at line 162 of file Subscription.\+php.
+
+\mbox{\Hypertarget{class_phelix_1_1_flutterwave_1_1_subscription_a396eeb919b72102d3e098f55eba303e5}\label{class_phelix_1_1_flutterwave_1_1_subscription_a396eeb919b72102d3e098f55eba303e5}} 
+\index{Subscription@{Subscription}!getOneSubscription@{getOneSubscription}}
+\index{getOneSubscription@{getOneSubscription}!Subscription@{Subscription}}
+\doxysubsubsection{\texorpdfstring{getOneSubscription()}{getOneSubscription()}}
+{\footnotesize\ttfamily get\+One\+Subscription (\begin{DoxyParamCaption}\item[{}]{\$id }\end{DoxyParamCaption})}
+
+Get a single subscription
+
+
+\begin{DoxyParams}{Parameters}
+{\em \$id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mixed 
+\end{DoxyReturn}
+
+
+Definition at line 149 of file Subscription.\+php.
+
+\mbox{\Hypertarget{class_phelix_1_1_flutterwave_1_1_subscription_a5ab2bcfd52526d0134f671af1f006fca}\label{class_phelix_1_1_flutterwave_1_1_subscription_a5ab2bcfd52526d0134f671af1f006fca}} 
+\index{Subscription@{Subscription}!getPlanSubscriptions@{getPlanSubscriptions}}
+\index{getPlanSubscriptions@{getPlanSubscriptions}!Subscription@{Subscription}}
+\doxysubsubsection{\texorpdfstring{getPlanSubscriptions()}{getPlanSubscriptions()}}
+{\footnotesize\ttfamily get\+Plan\+Subscriptions (\begin{DoxyParamCaption}\item[{}]{\$plan\+Id,  }\item[{}]{\$transaction\+Id = {\ttfamily null},  }\item[{}]{\$subscribed\+From = {\ttfamily null},  }\item[{}]{\$subscribed\+To = {\ttfamily null},  }\item[{}]{\$next\+Due\+From = {\ttfamily null},  }\item[{}]{\$next\+Due\+To = {\ttfamily null},  }\item[{}]{\$page = {\ttfamily null},  }\item[{}]{\$status = {\ttfamily null} }\end{DoxyParamCaption})}
+
+Get subscriptions to a specific plan
+
+
+\begin{DoxyParams}[1]{Parameters}
+int & {\em \$plan\+Id} & This is the ID of the payment plan. It is returned in the call to create a payment plan as data.\+id \\
+\hline
+string & {\em \$email} & This is the email of the subscribers \\
+\hline
+int & {\em \$transaction\+Id} & This is the id of the transaction. It is returned in the call to verify a transaction as data.\+id \\
+\hline
+string & {\em \$subscribed\+From} & This is the params to filter from the start date of the subscriptions \\
+\hline
+string & {\em \$subscribed\+To} & This is the params to filter to the end date of the subscriptions \\
+\hline
+string & {\em \$next\+Due\+From} & This is the params to filter from the start date of the next due subscriptions \\
+\hline
+string & {\em \$next\+Due\+To} & This is the params to filter to the end date of the next due subscriptions \\
+\hline
+int & {\em \$page} & This is the page number to retrieve e.\+g. setting 1 retrieves the first page \\
+\hline
+string & {\em \$status} & This is the params used to filter the list of subscription based on the status which can be either active or cancelled \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mixed 
+\end{DoxyReturn}
+
+
+Definition at line 95 of file Subscription.\+php.
+
+\mbox{\Hypertarget{class_phelix_1_1_flutterwave_1_1_subscription_ae89b666814959b01d89a6ddaffb48d70}\label{class_phelix_1_1_flutterwave_1_1_subscription_ae89b666814959b01d89a6ddaffb48d70}} 
+\index{Subscription@{Subscription}!getSubscriptions@{getSubscriptions}}
+\index{getSubscriptions@{getSubscriptions}!Subscription@{Subscription}}
+\doxysubsubsection{\texorpdfstring{getSubscriptions()}{getSubscriptions()}}
+{\footnotesize\ttfamily get\+Subscriptions (\begin{DoxyParamCaption}\item[{}]{\$email = {\ttfamily null},  }\item[{}]{\$transaction\+Id = {\ttfamily null},  }\item[{}]{\$plan\+Id = {\ttfamily null},  }\item[{}]{\$subscribed\+From = {\ttfamily null},  }\item[{}]{\$subscribed\+To = {\ttfamily null},  }\item[{}]{\$next\+Due\+From = {\ttfamily null},  }\item[{}]{\$next\+Due\+To = {\ttfamily null},  }\item[{}]{\$page = {\ttfamily null},  }\item[{}]{\$status = {\ttfamily null} }\end{DoxyParamCaption})}
+
+Get all subscriptions
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$email} & This is the email of the subscribers \\
+\hline
+int & {\em \$transaction\+Id} & This is the id of the transaction. It is returned in the call to verify a transaction as data.\+id \\
+\hline
+int & {\em \$plan\+Id} & This is the ID of the payment plan. It is returned in the call to create a payment plan as data.\+id \\
+\hline
+string & {\em \$subscribed\+From} & This is the params to filter from the start date of the subscriptions \\
+\hline
+string & {\em \$subscribed\+To} & This is the params to filter to the end date of the subscriptions \\
+\hline
+string & {\em \$next\+Due\+From} & This is the params to filter from the start date of the next due subscriptions \\
+\hline
+string & {\em \$next\+Due\+To} & This is the params to filter to the end date of the next due subscriptions \\
+\hline
+int & {\em \$page} & This is the page number to retrieve e.\+g. setting 1 retrieves the first page \\
+\hline
+string & {\em \$status} & This is the params used to filter the list of subscription based on the status which can be either active or cancelled \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mixed 
+\end{DoxyReturn}
+
+
+Definition at line 43 of file Subscription.\+php.
+
+\mbox{\Hypertarget{class_phelix_1_1_flutterwave_1_1_subscription_a7ed8dfd10cb93dd4e2456ea7da4174c9}\label{class_phelix_1_1_flutterwave_1_1_subscription_a7ed8dfd10cb93dd4e2456ea7da4174c9}} 
+\index{Subscription@{Subscription}!getUserPlanSubscriptions@{getUserPlanSubscriptions}}
+\index{getUserPlanSubscriptions@{getUserPlanSubscriptions}!Subscription@{Subscription}}
+\doxysubsubsection{\texorpdfstring{getUserPlanSubscriptions()}{getUserPlanSubscriptions()}}
+{\footnotesize\ttfamily get\+User\+Plan\+Subscriptions (\begin{DoxyParamCaption}\item[{}]{\$plan\+Id,  }\item[{}]{\$email,  }\item[{}]{\$transaction\+Id = {\ttfamily null},  }\item[{}]{\$subscribed\+From = {\ttfamily null},  }\item[{}]{\$subscribed\+To = {\ttfamily null},  }\item[{}]{\$next\+Due\+From = {\ttfamily null},  }\item[{}]{\$next\+Due\+To = {\ttfamily null},  }\item[{}]{\$page = {\ttfamily null},  }\item[{}]{\$status = {\ttfamily null} }\end{DoxyParamCaption})}
+
+Get a user\textquotesingle{}s subscription to a plan
+
+
+\begin{DoxyParams}[1]{Parameters}
+int & {\em \$plan\+Id} & This is the ID of the payment plan. It is returned in the call to create a payment plan as data.\+id \\
+\hline
+string & {\em \$email} & This is the email of the subscribers \\
+\hline
+int & {\em \$transaction\+Id} & This is the id of the transaction. It is returned in the call to verify a transaction as data.\+id \\
+\hline
+string & {\em \$subscribed\+From} & This is the params to filter from the start date of the subscriptions \\
+\hline
+string & {\em \$subscribed\+To} & This is the params to filter to the end date of the subscriptions \\
+\hline
+string & {\em \$next\+Due\+From} & This is the params to filter from the start date of the next due subscriptions \\
+\hline
+string & {\em \$next\+Due\+To} & This is the params to filter to the end date of the next due subscriptions \\
+\hline
+int & {\em \$page} & This is the page number to retrieve e.\+g. setting 1 retrieves the first page \\
+\hline
+string & {\em \$status} & This is the params used to filter the list of subscription based on the status which can be either active or cancelled \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mixed 
+\end{DoxyReturn}
+
+
+Definition at line 116 of file Subscription.\+php.
+
+\mbox{\Hypertarget{class_phelix_1_1_flutterwave_1_1_subscription_a8b9fdc78cf142aadb82893275a03385d}\label{class_phelix_1_1_flutterwave_1_1_subscription_a8b9fdc78cf142aadb82893275a03385d}} 
+\index{Subscription@{Subscription}!getUserSubscriptions@{getUserSubscriptions}}
+\index{getUserSubscriptions@{getUserSubscriptions}!Subscription@{Subscription}}
+\doxysubsubsection{\texorpdfstring{getUserSubscriptions()}{getUserSubscriptions()}}
+{\footnotesize\ttfamily get\+User\+Subscriptions (\begin{DoxyParamCaption}\item[{}]{\$email,  }\item[{}]{\$transaction\+Id = {\ttfamily null},  }\item[{}]{\$subscribed\+From = {\ttfamily null},  }\item[{}]{\$subscribed\+To = {\ttfamily null},  }\item[{}]{\$next\+Due\+From = {\ttfamily null},  }\item[{}]{\$next\+Due\+To = {\ttfamily null},  }\item[{}]{\$page = {\ttfamily null},  }\item[{}]{\$status = {\ttfamily null} }\end{DoxyParamCaption})}
+
+Get all subscriptions by a user
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$email} & This is the email of the subscribers \\
+\hline
+int & {\em \$transaction\+Id} & This is the id of the transaction. It is returned in the call to verify a transaction as data.\+id \\
+\hline
+string & {\em \$subscribed\+From} & This is the params to filter from the start date of the subscriptions \\
+\hline
+string & {\em \$subscribed\+To} & This is the params to filter to the end date of the subscriptions \\
+\hline
+string & {\em \$next\+Due\+From} & This is the params to filter from the start date of the next due subscriptions \\
+\hline
+string & {\em \$next\+Due\+To} & This is the params to filter to the end date of the next due subscriptions \\
+\hline
+int & {\em \$page} & This is the page number to retrieve e.\+g. setting 1 retrieves the first page \\
+\hline
+string & {\em \$status} & This is the params used to filter the list of subscription based on the status which can be either active or cancelled \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mixed 
+\end{DoxyReturn}
+
+
+Definition at line 136 of file Subscription.\+php.
+
+
+
+\doxysubsection{Field Documentation}
+\mbox{\Hypertarget{class_phelix_1_1_flutterwave_1_1_subscription_a35e87c00dec76834996b2c9296fdb1c8}\label{class_phelix_1_1_flutterwave_1_1_subscription_a35e87c00dec76834996b2c9296fdb1c8}} 
+\index{Subscription@{Subscription}!\$flutterwave@{\$flutterwave}}
+\index{\$flutterwave@{\$flutterwave}!Subscription@{Subscription}}
+\doxysubsubsection{\texorpdfstring{\$flutterwave}{$flutterwave}}
+{\footnotesize\ttfamily \$flutterwave\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 19 of file Subscription.\+php.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{_subscription_8php}{Subscription.\+php}}\end{DoxyCompactItemize}

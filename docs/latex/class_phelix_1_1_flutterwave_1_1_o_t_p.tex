@@ -1,0 +1,118 @@
+\hypertarget{class_phelix_1_1_flutterwave_1_1_o_t_p}{}\doxysection{O\+TP Class Reference}
+\label{class_phelix_1_1_flutterwave_1_1_o_t_p}\index{OTP@{OTP}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_o_t_p_aecd21b18abc9fe85deb68a37ae823bc0}{\+\_\+\+\_\+construct}} (\mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_flutterwave}{Flutterwave}} \$flutterwave)
+\item 
+\mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_o_t_p_a14ab79e5b7b61e4677781ef42eeb903a}{create\+O\+TP}} (\$customer\+Name, \$customer\+Email, \$customer\+Phone, \$merchant\+Name, \$length, \$medium, \$ttl=null, \$send\+To\+Customer=true)
+\item 
+\mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_o_t_p_a0fe41c0802b94abff331c07d068394b1}{validate\+O\+TP}} (\$reference, \$otp)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_o_t_p_a35e87c00dec76834996b2c9296fdb1c8}{\$flutterwave}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line 15 of file O\+T\+P.\+php.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_phelix_1_1_flutterwave_1_1_o_t_p_aecd21b18abc9fe85deb68a37ae823bc0}\label{class_phelix_1_1_flutterwave_1_1_o_t_p_aecd21b18abc9fe85deb68a37ae823bc0}} 
+\index{OTP@{OTP}!\_\_construct@{\_\_construct}}
+\index{\_\_construct@{\_\_construct}!OTP@{OTP}}
+\doxysubsubsection{\texorpdfstring{\_\_construct()}{\_\_construct()}}
+{\footnotesize\ttfamily \+\_\+\+\_\+construct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_flutterwave}{Flutterwave}}}]{\$flutterwave }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_o_t_p}{O\+TP}} constructor. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_flutterwave}{Flutterwave}} & {\em \$flutterwave} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 26 of file O\+T\+P.\+php.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_phelix_1_1_flutterwave_1_1_o_t_p_a14ab79e5b7b61e4677781ef42eeb903a}\label{class_phelix_1_1_flutterwave_1_1_o_t_p_a14ab79e5b7b61e4677781ef42eeb903a}} 
+\index{OTP@{OTP}!createOTP@{createOTP}}
+\index{createOTP@{createOTP}!OTP@{OTP}}
+\doxysubsubsection{\texorpdfstring{createOTP()}{createOTP()}}
+{\footnotesize\ttfamily create\+O\+TP (\begin{DoxyParamCaption}\item[{}]{\$customer\+Name,  }\item[{}]{\$customer\+Email,  }\item[{}]{\$customer\+Phone,  }\item[{}]{\$merchant\+Name,  }\item[{}]{\$length,  }\item[{}]{\$medium,  }\item[{}]{\$ttl = {\ttfamily null},  }\item[{}]{\$send\+To\+Customer = {\ttfamily true} }\end{DoxyParamCaption})}
+
+Create an \mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_o_t_p}{O\+TP}}
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$customer\+Name} & Name of the customer \\
+\hline
+string & {\em \$customer\+Email} & Email of the customer \\
+\hline
+string & {\em \$customer\+Phone} & Phone of the customer \\
+\hline
+string & {\em \$merchant\+Name} & This is your merchant/business name. It would display when the \mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_o_t_p}{O\+TP}} is sent \\
+\hline
+int & {\em \$length} & This is Integer length you want for the \mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_o_t_p}{O\+TP}}. \\
+\hline
+array & {\em \$medium} & the medium you want your customers to receive the \mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_o_t_p}{O\+TP}} on. Possible values are sms, email and whatsapp. You can pass more than one medium in the array"{} \\
+\hline
+int & {\em \$ttl} & Pass an integer value represented in minutes for how long you want the \mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_o_t_p}{O\+TP}} to live for before expiring \\
+\hline
+bool & {\em \$send\+To\+Customer} & Set to true to send otp to customer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mixed 
+\end{DoxyReturn}
+
+
+Definition at line 43 of file O\+T\+P.\+php.
+
+\mbox{\Hypertarget{class_phelix_1_1_flutterwave_1_1_o_t_p_a0fe41c0802b94abff331c07d068394b1}\label{class_phelix_1_1_flutterwave_1_1_o_t_p_a0fe41c0802b94abff331c07d068394b1}} 
+\index{OTP@{OTP}!validateOTP@{validateOTP}}
+\index{validateOTP@{validateOTP}!OTP@{OTP}}
+\doxysubsubsection{\texorpdfstring{validateOTP()}{validateOTP()}}
+{\footnotesize\ttfamily validate\+O\+TP (\begin{DoxyParamCaption}\item[{}]{\$reference,  }\item[{}]{\$otp }\end{DoxyParamCaption})}
+
+Validate \mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_o_t_p}{O\+TP}}
+
+
+\begin{DoxyParams}[1]{Parameters}
+string & {\em \$reference} & This is the reference that was returned in the create \mbox{\hyperlink{class_phelix_1_1_flutterwave_1_1_o_t_p}{O\+TP}} response \\
+\hline
+int & {\em \$otp} & This is the One time Pin sent to the user. You are meant to collect this from the user for validation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mixed 
+\end{DoxyReturn}
+
+
+Definition at line 73 of file O\+T\+P.\+php.
+
+
+
+\doxysubsection{Field Documentation}
+\mbox{\Hypertarget{class_phelix_1_1_flutterwave_1_1_o_t_p_a35e87c00dec76834996b2c9296fdb1c8}\label{class_phelix_1_1_flutterwave_1_1_o_t_p_a35e87c00dec76834996b2c9296fdb1c8}} 
+\index{OTP@{OTP}!\$flutterwave@{\$flutterwave}}
+\index{\$flutterwave@{\$flutterwave}!OTP@{OTP}}
+\doxysubsubsection{\texorpdfstring{\$flutterwave}{$flutterwave}}
+{\footnotesize\ttfamily \$flutterwave\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 20 of file O\+T\+P.\+php.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{_o_t_p_8php}{O\+T\+P.\+php}}\end{DoxyCompactItemize}

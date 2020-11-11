@@ -1,0 +1,499 @@
+.TH "Standard" 3 "Wed Nov 11 2020" "Flutterwave SDK" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Standard
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fB__construct\fP (\fBFlutterwave\fP $flutterwave)"
+.br
+.ti -1c
+.RI "\fBsetTransactionReference\fP ($transaction_reference)"
+.br
+.ti -1c
+.RI "\fBsetAmount\fP ($amount)"
+.br
+.ti -1c
+.RI "\fBsetCurrency\fP ($currency)"
+.br
+.ti -1c
+.RI "\fBpayViaCard\fP ()"
+.br
+.ti -1c
+.RI "\fBpayViaAccount\fP ()"
+.br
+.ti -1c
+.RI "\fBpayViaBank\fP ()"
+.br
+.ti -1c
+.RI "\fBpayViaMpesa\fP ()"
+.br
+.ti -1c
+.RI "\fBpayViaMobileMoneyFranco\fP ()"
+.br
+.ti -1c
+.RI "\fBpayViaMobileMoneyGhana\fP ()"
+.br
+.ti -1c
+.RI "\fBpayViaMobileMoneyRwanda\fP ()"
+.br
+.ti -1c
+.RI "\fBpayViaMobileMoneyTanzania\fP ()"
+.br
+.ti -1c
+.RI "\fBpayViaMobileMoneyUganda\fP ()"
+.br
+.ti -1c
+.RI "\fBpayViaMobileMoneyZambia\fP ()"
+.br
+.ti -1c
+.RI "\fBpayViaQr\fP ()"
+.br
+.ti -1c
+.RI "\fBpayViaUssd\fP ()"
+.br
+.ti -1c
+.RI "\fBpayViaCredit\fP ()"
+.br
+.ti -1c
+.RI "\fBpayViaBarter\fP ()"
+.br
+.ti -1c
+.RI "\fBpayViaPaga\fP ()"
+.br
+.ti -1c
+.RI "\fBpayViaVoucher\fP ()"
+.br
+.ti -1c
+.RI "\fBpayViaPayAttitude\fP ()"
+.br
+.ti -1c
+.RI "\fBsetRedirectURL\fP ($url)"
+.br
+.ti -1c
+.RI "\fBsetCustomer\fP ($name, $email, $phone,\&.\&.\&. $args)"
+.br
+.ti -1c
+.RI "\fBsetCustomizations\fP ($title, $description, $logo,\&.\&.\&. $args)"
+.br
+.ti -1c
+.RI "\fBsetIntegrityHash\fP ($hash)"
+.br
+.ti -1c
+.RI "\fBsetPaymentPlan\fP ($planId)"
+.br
+.ti -1c
+.RI "\fBsetSubAccounts\fP ($accounts)"
+.br
+.ti -1c
+.RI "\fBsetMetaData\fP (array $data)"
+.br
+.ti -1c
+.RI "\fBinitiateOneTimePayment\fP ()"
+.br
+.ti -1c
+.RI "\fBinitiateRecurrentPayment\fP ()"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fB$flutterwave\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 16 of file Standard\&.php\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "__construct (\fBFlutterwave\fP $flutterwave)"
+\fBStandard\fP constructor\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI$flutterwave\fP 
+.RE
+.PP
+
+.PP
+Definition at line 83 of file Standard\&.php\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "initiateOneTimePayment ()"
+Initiate a one time payment
+.PP
+\fBReturns\fP
+.RS 4
+\fBRequest\fP 
+.RE
+.PP
+
+.PP
+Definition at line 413 of file Standard\&.php\&.
+.SS "initiateRecurrentPayment ()"
+Initiate recurrent/subscription time payment
+.PP
+\fBParameters\fP
+.RS 4
+\fI$planId\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fBRequest\fP 
+.RE
+.PP
+
+.PP
+Definition at line 437 of file Standard\&.php\&.
+.SS "payViaAccount ()"
+Pay via account 
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 151 of file Standard\&.php\&.
+.SS "payViaBank ()"
+Pay via Bank 
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 161 of file Standard\&.php\&.
+.SS "payViaBarter ()"
+Pay via barter
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 273 of file Standard\&.php\&.
+.SS "payViaCard ()"
+Pay via card 
+.PP
+Definition at line 141 of file Standard\&.php\&.
+.SS "payViaCredit ()"
+Pay via credit 
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 262 of file Standard\&.php\&.
+.SS "payViaMobileMoneyFranco ()"
+Pay via mobile money Franco 
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 182 of file Standard\&.php\&.
+.SS "payViaMobileMoneyGhana ()"
+Pay via Mobile money Ghana 
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 192 of file Standard\&.php\&.
+.SS "payViaMobileMoneyRwanda ()"
+Pay via Mobile money Rwanda 
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 202 of file Standard\&.php\&.
+.SS "payViaMobileMoneyTanzania ()"
+Pay via Mobile Money Tanzania 
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 212 of file Standard\&.php\&.
+.SS "payViaMobileMoneyUganda ()"
+Pay via Mobile Money Uganda 
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 222 of file Standard\&.php\&.
+.SS "payViaMobileMoneyZambia ()"
+Pay via Mobile money Zambia 
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 232 of file Standard\&.php\&.
+.SS "payViaMpesa ()"
+Pay via M-PESA 
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 172 of file Standard\&.php\&.
+.SS "payViaPaga ()"
+Pay via PAGA 
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 283 of file Standard\&.php\&.
+.SS "payViaPayAttitude ()"
+Pay via Pay Attitude 
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 303 of file Standard\&.php\&.
+.SS "payViaQr ()"
+Pay via QR 
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 242 of file Standard\&.php\&.
+.SS "payViaUssd ()"
+Pay via USSD 
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 252 of file Standard\&.php\&.
+.SS "payViaVoucher ()"
+Pay via Voucher 
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 293 of file Standard\&.php\&.
+.SS "setAmount ( $amount)"
+Set transaction amount
+.PP
+\fBParameters\fP
+.RS 4
+\fI$amount\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 106 of file Standard\&.php\&.
+.SS "setCurrency ( $currency)"
+Set currency
+.PP
+\fBParameters\fP
+.RS 4
+\fI$currency\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 119 of file Standard\&.php\&.
+.SS "setCustomer ( $name,  $email,  $phone,  $args)"
+Set customer details
+.PP
+\fBParameters\fP
+.RS 4
+\fI$name\fP 
+.br
+\fI$email\fP 
+.br
+\fI$phone\fP 
+.br
+\fImixed\fP \&.\&.\&.$args 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 330 of file Standard\&.php\&.
+.SS "setCustomizations ( $title,  $description,  $logo,  $args)"
+Set customizations
+.PP
+\fBParameters\fP
+.RS 4
+\fI$title\fP 
+.br
+\fI$description\fP 
+.br
+\fI$logo\fP 
+.br
+\fImixed\fP \&.\&.\&.$args 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 354 of file Standard\&.php\&.
+.SS "setIntegrityHash ( $hash)"
+Set the integrity hash
+.PP
+\fBParameters\fP
+.RS 4
+\fI$hash\fP 
+.RE
+.PP
+
+.PP
+Definition at line 373 of file Standard\&.php\&.
+.SS "setMetaData (array $data)"
+
+.PP
+Definition at line 402 of file Standard\&.php\&.
+.SS "setPaymentPlan ( $planId)"
+Set the payment plan id for recurrent payments
+.PP
+\fBParameters\fP
+.RS 4
+\fI$planId\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 383 of file Standard\&.php\&.
+.SS "setRedirectURL ( $url)"
+Set redirect url
+.PP
+\fBParameters\fP
+.RS 4
+\fI$url\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 315 of file Standard\&.php\&.
+.SS "setSubAccounts ( $accounts)"
+Set sub accounts
+.PP
+\fBParameters\fP
+.RS 4
+\fI$accounts\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 395 of file Standard\&.php\&.
+.SS "setTransactionReference ( $transaction_reference)"
+Set transaction reference
+.PP
+\fBParameters\fP
+.RS 4
+\fI$transaction_reference\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+$this 
+.RE
+.PP
+
+.PP
+Definition at line 93 of file Standard\&.php\&.
+.SH "Field Documentation"
+.PP 
+.SS "$flutterwave\fC [protected]\fP"
+
+.PP
+Definition at line 77 of file Standard\&.php\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Flutterwave SDK from the source code\&.

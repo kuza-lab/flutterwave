@@ -1,0 +1,169 @@
+.TH "PaymentPlan" 3 "Wed Nov 11 2020" "Flutterwave SDK" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+PaymentPlan
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fB__construct\fP (\fBFlutterwave\fP $flutterwave)"
+.br
+.ti -1c
+.RI "\fBcreatePlan\fP (string $currency, string $name, float $amount, string $interval, int $duration)"
+.br
+.ti -1c
+.RI "\fBgetPlans\fP ($from=null, $to=null, $page=null, $amount=null, $currency=null, $interval=null, $status=null)"
+.br
+.ti -1c
+.RI "\fBgetOnePlan\fP ($id)"
+.br
+.ti -1c
+.RI "\fBupdatePlan\fP ($id, $name=null, $status=null)"
+.br
+.ti -1c
+.RI "\fBcancelPlan\fP ($id)"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fB$flutterwave\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 14 of file PaymentPlan\&.php\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "__construct (\fBFlutterwave\fP $flutterwave)"
+\fBStandard\fP constructor\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI$flutterwave\fP 
+.RE
+.PP
+
+.PP
+Definition at line 25 of file PaymentPlan\&.php\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "cancelPlan ( $id)"
+Cancel an existing payment plan
+.PP
+\fBParameters\fP
+.RS 4
+\fI$id\fP This is the unique id of the payment plan you want to fetch\&. It is returned in the call to create a payment plan 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+mixed 
+.RE
+.PP
+
+.PP
+Definition at line 142 of file PaymentPlan\&.php\&.
+.SS "createPlan (string $currency, string $name, float $amount, string $interval, int $duration)"
+Create a new plan
+.PP
+\fBParameters\fP
+.RS 4
+\fI$currency\fP Currency for the plan 
+.br
+\fI$name\fP This is the name of the payment plan, it will appear on the subscription reminder emails 
+.br
+\fI$amount\fP This is the amount to charge all customers subscribed to this plan 
+.br
+\fI$interval\fP This will determine the frequency of the charges for this plan\&. Could be yearly, quarterly, monthly, weekly, daily, etc\&. 
+.br
+\fI$duration\fP This is the frequency, it is numeric, e\&.g\&. if set to 5 and intervals is set to monthly you would be charged 5 months, and then the subscription stops 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+mixed 
+.RE
+.PP
+
+.PP
+Definition at line 39 of file PaymentPlan\&.php\&.
+.SS "getOnePlan ( $id)"
+Get details of a single plan
+.PP
+\fBParameters\fP
+.RS 4
+\fI$id\fP This is the unique id of the payment plan you want to fetch\&. It is returned in the call to create a payment plan 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+mixed 
+.RE
+.PP
+
+.PP
+Definition at line 103 of file PaymentPlan\&.php\&.
+.SS "getPlans ( $from = \fCnull\fP,  $to = \fCnull\fP,  $page = \fCnull\fP,  $amount = \fCnull\fP,  $currency = \fCnull\fP,  $interval = \fCnull\fP,  $status = \fCnull\fP)"
+Get list of payment plans
+.PP
+\fBParameters\fP
+.RS 4
+\fI$from\fP This is the specified date to start the list from\&. YYYY-MM-DD 
+.br
+\fI$to\fP The is the specified end period for the search\&. YYYY-MM-DD 
+.br
+\fI$page\fP This is the page number to retrieve e\&.g\&. setting 1 retrieves the first page 
+.br
+\fI$amount\fP This is the exact amount set when creating the payment plan 
+.br
+\fI$currency\fP This is the currency the payment plan amount is charged in 
+.br
+\fI$interval\fP This is how often the payment plan is set to execute 
+.br
+\fI$status\fP This is the status of the payment plan 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+mixed 
+.RE
+.PP
+
+.PP
+Definition at line 66 of file PaymentPlan\&.php\&.
+.SS "updatePlan ( $id,  $name = \fCnull\fP,  $status = \fCnull\fP)"
+Update a plan
+.PP
+\fBParameters\fP
+.RS 4
+\fI$id\fP This is the unique id of the payment plan you want to fetch\&. It is returned in the call to create a payment plan 
+.br
+\fI$name\fP The new name of the payment plan 
+.br
+\fI$status\fP The new status of the payment plan 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+mixed 
+.RE
+.PP
+
+.PP
+Definition at line 119 of file PaymentPlan\&.php\&.
+.SH "Field Documentation"
+.PP 
+.SS "$flutterwave\fC [protected]\fP"
+
+.PP
+Definition at line 19 of file PaymentPlan\&.php\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Flutterwave SDK from the source code\&.

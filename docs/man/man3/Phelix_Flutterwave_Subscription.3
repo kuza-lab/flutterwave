@@ -1,0 +1,245 @@
+.TH "Subscription" 3 "Wed Nov 11 2020" "Flutterwave SDK" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Subscription
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fB__construct\fP (\fBFlutterwave\fP $flutterwave)"
+.br
+.ti -1c
+.RI "\fBgetSubscriptions\fP ($email=null, $transactionId=null, $planId=null, $subscribedFrom=null, $subscribedTo=null, $nextDueFrom=null, $nextDueTo=null, $page=null, $status=null)"
+.br
+.ti -1c
+.RI "\fBgetPlanSubscriptions\fP ($planId, $transactionId=null, $subscribedFrom=null, $subscribedTo=null, $nextDueFrom=null, $nextDueTo=null, $page=null, $status=null)"
+.br
+.ti -1c
+.RI "\fBgetUserPlanSubscriptions\fP ($planId, $email, $transactionId=null, $subscribedFrom=null, $subscribedTo=null, $nextDueFrom=null, $nextDueTo=null, $page=null, $status=null)"
+.br
+.ti -1c
+.RI "\fBgetUserSubscriptions\fP ($email, $transactionId=null, $subscribedFrom=null, $subscribedTo=null, $nextDueFrom=null, $nextDueTo=null, $page=null, $status=null)"
+.br
+.ti -1c
+.RI "\fBgetOneSubscription\fP ($id)"
+.br
+.ti -1c
+.RI "\fBcancelSubscription\fP ($id)"
+.br
+.ti -1c
+.RI "\fBactivateSubscription\fP ($id)"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fB$flutterwave\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 14 of file Subscription\&.php\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "__construct (\fBFlutterwave\fP $flutterwave)"
+\fBStandard\fP constructor\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI$flutterwave\fP 
+.RE
+.PP
+
+.PP
+Definition at line 25 of file Subscription\&.php\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "activateSubscription ( $id)"
+Activate a subscription
+.PP
+\fBParameters\fP
+.RS 4
+\fI$id\fP This is the unique id of the subscription you want to activate\&. It is returned in the Get a subscription call as data\&.id 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+mixed 
+.RE
+.PP
+
+.PP
+Definition at line 175 of file Subscription\&.php\&.
+.SS "cancelSubscription ( $id)"
+Cancel a subscription
+.PP
+\fBParameters\fP
+.RS 4
+\fI$id\fP This is the unique id of the subscription you want to cancel\&. It is returned in the Get a subscription call as data\&.id 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+mixed 
+.RE
+.PP
+
+.PP
+Definition at line 162 of file Subscription\&.php\&.
+.SS "getOneSubscription ( $id)"
+Get a single subscription
+.PP
+\fBParameters\fP
+.RS 4
+\fI$id\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+mixed 
+.RE
+.PP
+
+.PP
+Definition at line 149 of file Subscription\&.php\&.
+.SS "getPlanSubscriptions ( $planId,  $transactionId = \fCnull\fP,  $subscribedFrom = \fCnull\fP,  $subscribedTo = \fCnull\fP,  $nextDueFrom = \fCnull\fP,  $nextDueTo = \fCnull\fP,  $page = \fCnull\fP,  $status = \fCnull\fP)"
+Get subscriptions to a specific plan
+.PP
+\fBParameters\fP
+.RS 4
+\fI$planId\fP This is the ID of the payment plan\&. It is returned in the call to create a payment plan as data\&.id 
+.br
+\fI$email\fP This is the email of the subscribers 
+.br
+\fI$transactionId\fP This is the id of the transaction\&. It is returned in the call to verify a transaction as data\&.id 
+.br
+\fI$subscribedFrom\fP This is the params to filter from the start date of the subscriptions 
+.br
+\fI$subscribedTo\fP This is the params to filter to the end date of the subscriptions 
+.br
+\fI$nextDueFrom\fP This is the params to filter from the start date of the next due subscriptions 
+.br
+\fI$nextDueTo\fP This is the params to filter to the end date of the next due subscriptions 
+.br
+\fI$page\fP This is the page number to retrieve e\&.g\&. setting 1 retrieves the first page 
+.br
+\fI$status\fP This is the params used to filter the list of subscription based on the status which can be either active or cancelled 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+mixed 
+.RE
+.PP
+
+.PP
+Definition at line 95 of file Subscription\&.php\&.
+.SS "getSubscriptions ( $email = \fCnull\fP,  $transactionId = \fCnull\fP,  $planId = \fCnull\fP,  $subscribedFrom = \fCnull\fP,  $subscribedTo = \fCnull\fP,  $nextDueFrom = \fCnull\fP,  $nextDueTo = \fCnull\fP,  $page = \fCnull\fP,  $status = \fCnull\fP)"
+Get all subscriptions
+.PP
+\fBParameters\fP
+.RS 4
+\fI$email\fP This is the email of the subscribers 
+.br
+\fI$transactionId\fP This is the id of the transaction\&. It is returned in the call to verify a transaction as data\&.id 
+.br
+\fI$planId\fP This is the ID of the payment plan\&. It is returned in the call to create a payment plan as data\&.id 
+.br
+\fI$subscribedFrom\fP This is the params to filter from the start date of the subscriptions 
+.br
+\fI$subscribedTo\fP This is the params to filter to the end date of the subscriptions 
+.br
+\fI$nextDueFrom\fP This is the params to filter from the start date of the next due subscriptions 
+.br
+\fI$nextDueTo\fP This is the params to filter to the end date of the next due subscriptions 
+.br
+\fI$page\fP This is the page number to retrieve e\&.g\&. setting 1 retrieves the first page 
+.br
+\fI$status\fP This is the params used to filter the list of subscription based on the status which can be either active or cancelled 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+mixed 
+.RE
+.PP
+
+.PP
+Definition at line 43 of file Subscription\&.php\&.
+.SS "getUserPlanSubscriptions ( $planId,  $email,  $transactionId = \fCnull\fP,  $subscribedFrom = \fCnull\fP,  $subscribedTo = \fCnull\fP,  $nextDueFrom = \fCnull\fP,  $nextDueTo = \fCnull\fP,  $page = \fCnull\fP,  $status = \fCnull\fP)"
+Get a user's subscription to a plan
+.PP
+\fBParameters\fP
+.RS 4
+\fI$planId\fP This is the ID of the payment plan\&. It is returned in the call to create a payment plan as data\&.id 
+.br
+\fI$email\fP This is the email of the subscribers 
+.br
+\fI$transactionId\fP This is the id of the transaction\&. It is returned in the call to verify a transaction as data\&.id 
+.br
+\fI$subscribedFrom\fP This is the params to filter from the start date of the subscriptions 
+.br
+\fI$subscribedTo\fP This is the params to filter to the end date of the subscriptions 
+.br
+\fI$nextDueFrom\fP This is the params to filter from the start date of the next due subscriptions 
+.br
+\fI$nextDueTo\fP This is the params to filter to the end date of the next due subscriptions 
+.br
+\fI$page\fP This is the page number to retrieve e\&.g\&. setting 1 retrieves the first page 
+.br
+\fI$status\fP This is the params used to filter the list of subscription based on the status which can be either active or cancelled 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+mixed 
+.RE
+.PP
+
+.PP
+Definition at line 116 of file Subscription\&.php\&.
+.SS "getUserSubscriptions ( $email,  $transactionId = \fCnull\fP,  $subscribedFrom = \fCnull\fP,  $subscribedTo = \fCnull\fP,  $nextDueFrom = \fCnull\fP,  $nextDueTo = \fCnull\fP,  $page = \fCnull\fP,  $status = \fCnull\fP)"
+Get all subscriptions by a user
+.PP
+\fBParameters\fP
+.RS 4
+\fI$email\fP This is the email of the subscribers 
+.br
+\fI$transactionId\fP This is the id of the transaction\&. It is returned in the call to verify a transaction as data\&.id 
+.br
+\fI$subscribedFrom\fP This is the params to filter from the start date of the subscriptions 
+.br
+\fI$subscribedTo\fP This is the params to filter to the end date of the subscriptions 
+.br
+\fI$nextDueFrom\fP This is the params to filter from the start date of the next due subscriptions 
+.br
+\fI$nextDueTo\fP This is the params to filter to the end date of the next due subscriptions 
+.br
+\fI$page\fP This is the page number to retrieve e\&.g\&. setting 1 retrieves the first page 
+.br
+\fI$status\fP This is the params used to filter the list of subscription based on the status which can be either active or cancelled 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+mixed 
+.RE
+.PP
+
+.PP
+Definition at line 136 of file Subscription\&.php\&.
+.SH "Field Documentation"
+.PP 
+.SS "$flutterwave\fC [protected]\fP"
+
+.PP
+Definition at line 19 of file Subscription\&.php\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Flutterwave SDK from the source code\&.

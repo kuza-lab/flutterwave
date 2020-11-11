@@ -1,0 +1,92 @@
+.TH "Settlement" 3 "Wed Nov 11 2020" "Flutterwave SDK" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+Settlement
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fB__construct\fP (\fBFlutterwave\fP $flutterwave)"
+.br
+.ti -1c
+.RI "\fBgetSettlements\fP ($page=null)"
+.br
+.ti -1c
+.RI "\fBgetOneSettlement\fP ($id, $from=null, $to=null)"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fB$flutterwave\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 14 of file Settlement\&.php\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "__construct (\fBFlutterwave\fP $flutterwave)"
+\fBSettlement\fP constructor\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI$flutterwave\fP 
+.RE
+.PP
+
+.PP
+Definition at line 25 of file Settlement\&.php\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "getOneSettlement ( $id,  $from = \fCnull\fP,  $to = \fCnull\fP)"
+Get details of one specific settlement
+.PP
+\fBParameters\fP
+.RS 4
+\fI$id\fP 
+.br
+\fI$from\fP The start date range to retrieve data from\&. YYYY:MM:DD 
+.br
+\fI$to\fP The end date range to retrieve data\&. YYYY:MM:DD 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+mixed 
+.RE
+.PP
+
+.PP
+Definition at line 56 of file Settlement\&.php\&.
+.SS "getSettlements ( $page = \fCnull\fP)"
+Get all settlements
+.PP
+\fBParameters\fP
+.RS 4
+\fI$page\fP This is the page number to retrieve e\&.g\&. setting 1 retrieves the first page 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+mixed 
+.RE
+.PP
+
+.PP
+Definition at line 35 of file Settlement\&.php\&.
+.SH "Field Documentation"
+.PP 
+.SS "$flutterwave\fC [protected]\fP"
+
+.PP
+Definition at line 19 of file Settlement\&.php\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Flutterwave SDK from the source code\&.

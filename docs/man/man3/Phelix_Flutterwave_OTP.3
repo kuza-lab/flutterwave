@@ -1,0 +1,104 @@
+.TH "OTP" 3 "Wed Nov 11 2020" "Flutterwave SDK" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+OTP
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fB__construct\fP (\fBFlutterwave\fP $flutterwave)"
+.br
+.ti -1c
+.RI "\fBcreateOTP\fP ($customerName, $customerEmail, $customerPhone, $merchantName, $length, $medium, $ttl=null, $sendToCustomer=true)"
+.br
+.ti -1c
+.RI "\fBvalidateOTP\fP ($reference, $otp)"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fB$flutterwave\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Definition at line 15 of file OTP\&.php\&.
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "__construct (\fBFlutterwave\fP $flutterwave)"
+\fBOTP\fP constructor\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI$flutterwave\fP 
+.RE
+.PP
+
+.PP
+Definition at line 26 of file OTP\&.php\&.
+.SH "Member Function Documentation"
+.PP 
+.SS "createOTP ( $customerName,  $customerEmail,  $customerPhone,  $merchantName,  $length,  $medium,  $ttl = \fCnull\fP,  $sendToCustomer = \fCtrue\fP)"
+Create an \fBOTP\fP
+.PP
+\fBParameters\fP
+.RS 4
+\fI$customerName\fP Name of the customer 
+.br
+\fI$customerEmail\fP Email of the customer 
+.br
+\fI$customerPhone\fP Phone of the customer 
+.br
+\fI$merchantName\fP This is your merchant/business name\&. It would display when the \fBOTP\fP is sent 
+.br
+\fI$length\fP This is Integer length you want for the \fBOTP\fP\&. 
+.br
+\fI$medium\fP the medium you want your customers to receive the \fBOTP\fP on\&. Possible values are sms, email and whatsapp\&. You can pass more than one medium in the array" 
+.br
+\fI$ttl\fP Pass an integer value represented in minutes for how long you want the \fBOTP\fP to live for before expiring 
+.br
+\fI$sendToCustomer\fP Set to true to send otp to customer 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+mixed 
+.RE
+.PP
+
+.PP
+Definition at line 43 of file OTP\&.php\&.
+.SS "validateOTP ( $reference,  $otp)"
+Validate \fBOTP\fP
+.PP
+\fBParameters\fP
+.RS 4
+\fI$reference\fP This is the reference that was returned in the create \fBOTP\fP response 
+.br
+\fI$otp\fP This is the One time Pin sent to the user\&. You are meant to collect this from the user for validation 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+mixed 
+.RE
+.PP
+
+.PP
+Definition at line 73 of file OTP\&.php\&.
+.SH "Field Documentation"
+.PP 
+.SS "$flutterwave\fC [protected]\fP"
+
+.PP
+Definition at line 20 of file OTP\&.php\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Flutterwave SDK from the source code\&.
