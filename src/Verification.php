@@ -67,4 +67,19 @@ final class Verification {
         return $response;
     }
 
+    /**
+     * Query a transaction
+     * @param $transactionId
+     * @return bool
+     */
+    public function queryTransaction($transactionId) {
+
+        $request = $this->flutterwave->request->request("get", "transactions/$transactionId/verify", $this->flutterwave->token);
+
+        if ($request->success !== false) {
+            return $request->responseData;
+        }
+        return false;
+    }
+
 }
